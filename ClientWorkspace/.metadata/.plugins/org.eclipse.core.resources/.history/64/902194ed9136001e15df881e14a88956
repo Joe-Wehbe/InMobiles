@@ -23,7 +23,7 @@ public class App {
 		}	
 	}
 	
-	public void disconnect() {
+	public void exitProgram() {
 		System.out.println("Client disconnected");
 		System.exit(0);
 	}
@@ -64,7 +64,7 @@ public class App {
 					break;
 					
 				case 6:
-					disconnect();
+					exitProgram();
 					break;
 				
 				default:
