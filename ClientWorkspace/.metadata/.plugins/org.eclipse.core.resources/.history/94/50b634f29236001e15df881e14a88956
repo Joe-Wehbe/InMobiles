@@ -12,6 +12,7 @@ public class App {
 	private final OkHttpClient client = new OkHttpClient();
 	private String listAllURL = "http://localhost:1559/class/list";
 	private String searchByIdURL = "http://localhost:1559/class/";
+	Scanner scanner = new Scanner(System.in);
 	
 	public void listAll() {		
 		Request listAllRequest = new Request.Builder().url(listAllURL).build();
@@ -26,9 +27,6 @@ public class App {
 	}
 	
 	public void searchById() {
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-
 		System.out.println("Enter the ID: ");
 		String id = scanner.nextLine();
 		
@@ -40,7 +38,8 @@ public class App {
 			
 		}catch(IOException e) {
 			e.printStackTrace();
-		}	
+		}
+		
 	}
 	
 	public void disconnect() {
@@ -51,9 +50,7 @@ public class App {
 	public void run() {
 		int flag = 1;
 		int option;
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-
+		
 		while(flag == 1) {
 			System.out.println();
 			System.out.println("1. List All");
@@ -73,7 +70,7 @@ public class App {
 					break;
 				
 				case 2:
-					searchById();
+					searchById
 					break;
 					
 				case 3:

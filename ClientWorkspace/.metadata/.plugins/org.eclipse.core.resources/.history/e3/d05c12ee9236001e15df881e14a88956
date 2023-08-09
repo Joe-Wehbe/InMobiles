@@ -10,32 +10,12 @@ import okhttp3.Response;
 public class App {
 	
 	private final OkHttpClient client = new OkHttpClient();
-	private String listAllURL = "http://localhost:1559/class/list";
-	private String searchByIdURL = "http://localhost:1559/class/";
 	
 	public void listAll() {		
-		Request listAllRequest = new Request.Builder().url(listAllURL).build();
+		Request listAllRequest = new Request.Builder().url("http://localhost:1559/class/list").build();
 		
 		try {
 			Response response = client.newCall(listAllRequest).execute();
-			System.out.println(response.body().string());
-			
-		}catch(IOException e) {
-			e.printStackTrace();
-		}	
-	}
-	
-	public void searchById() {
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-
-		System.out.println("Enter the ID: ");
-		String id = scanner.nextLine();
-		
-		Request request = new Request.Builder().url(searchByIdURL + id).build();
-		
-		try {
-			Response response = client.newCall(request).execute();
 			System.out.println(response.body().string());
 			
 		}catch(IOException e) {
@@ -49,11 +29,10 @@ public class App {
 	}
 	
 	public void run() {
+		Scanner scanner = new Scanner(System.in);
 		int flag = 1;
 		int option;
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-
+		
 		while(flag == 1) {
 			System.out.println();
 			System.out.println("1. List All");
@@ -73,7 +52,6 @@ public class App {
 					break;
 				
 				case 2:
-					searchById();
 					break;
 					
 				case 3:
@@ -98,5 +76,7 @@ public class App {
 	public static void main(String[] args) throws IOException {
 		App client = new App();
 		client.run();
+
+
 	}
 }
