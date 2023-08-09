@@ -1,14 +1,13 @@
 package net.inmobiles.ClientWebAPI;
 
+
+
 public class Name {
 	
 	private String id;
 	private String fname;
 	private String lname;
-	
-	public Name() {
-		
-	}
+
 
 	public Name(String id, String fname, String lname) {
 		super();
@@ -43,7 +42,7 @@ public class Name {
 
 	@Override
 	public String toString() {
-		return "Name [id=" + id + ", fname=" + fname + ", lname=" + lname + "]";
+		return "id: " + id + ", fname: " + fname + ", lname: " + lname;
 	}
 
 

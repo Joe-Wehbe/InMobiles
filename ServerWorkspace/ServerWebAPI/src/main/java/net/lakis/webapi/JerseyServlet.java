@@ -1,5 +1,6 @@
 package net.lakis.webapi;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,12 +48,12 @@ public class JerseyServlet {
 	@GET
 	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Map<String, Name> listAll() {
+	public Collection<Name> listAll() {
 		map.put("1", new Name("1","joe", "wwehbe"));
 		map.put("2", new Name("2","lol", "wwehbe"));
 		map.put("3", new Name("3","hi", "wwehbe"));
 
-		return map;
+		return map.values();
 	}
 
 	// Method that returns the name of a specific user by id
@@ -68,11 +69,11 @@ public class JerseyServlet {
 	@Path("/add")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Map<String, Name> addName(Name name) {
+	public Collection<Name> addName(Name name) {
 		name.setId(String.valueOf(id++));
 		map.put(name.getId(), name);
 		System.out.println("Name added");
-		return map;
+		return map.values();
 	}
 	
 	// Method that updates a name specified by the id
@@ -80,10 +81,10 @@ public class JerseyServlet {
 	@Path("/update")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Map<String, Name> updateName(Name name) {
+	public Collection<Name> updateName(Name name) {
 		map.put(name.getId(), name);
 		System.out.println("Name updated");
-		return map;
+		return map.values();
 	}
 	
 	// Method that deletes a name specified by the id
@@ -91,10 +92,10 @@ public class JerseyServlet {
 	@Path("/delete")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Map<String, Name> deleteName(Name name){
+	public Collection<Name> deleteName(Name name){
 		map.remove(name.getId());
 		System.out.println("Name deleted");
-		return map;
+		return map.values();
 	}
 	
 

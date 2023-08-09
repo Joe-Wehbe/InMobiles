@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;name&apos; in &apos;net.inmobiles.ClientWebAPI.App.listAll()&apos; to &apos;names&apos;&#x0D;&#x0A;- Original project: &apos;ClientWebAPI&apos;&#x0D;&#x0A;- Original element: &apos;net.inmobiles.ClientWebAPI.App.listAll().name&apos;&#x0D;&#x0A;- Renamed element: &apos;name&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;name&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;net.inmobiles.ClientWebAPI{App.java[App~listAll@name!1041!1094!1048!1051!\[QName;!0!false" name="names" references="true" stamp="1691580050118" version="1.0"/>
+</session>

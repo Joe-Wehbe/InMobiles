@@ -1,10 +1,15 @@
 package net.inmobiles.ClientWebAPI;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Scanner;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class App {
@@ -12,23 +17,32 @@ public class App {
 	private final OkHttpClient client = new OkHttpClient();
 	private String listAllURL = "http://localhost:1559/class/list";
 	private String searchByIdURL = "http://localhost:1559/class/";
+	private String addURL = "http://localhost:1559/class/add";
+	private String updateURL = "http://localhost:1559/class/update";
+	private String deleteURL = "http://localhost:1559/class/delete";
 	
 	public void listAll() {		
 		Request listAllRequest = new Request.Builder().url(listAllURL).build();
 		
 		try {
 			Response response = client.newCall(listAllRequest).execute();
-			System.out.println(response.body().string());
+			String jsonFormat = response.body().string();
+						
+			Gson gson = new GsonBuilder().create();
+			Name[] names = gson.fromJson(jsonFormat, Name[].class);
+			
+			for (int i = 0; i < names.length; i++) {				
+				System.out.println(names[i].toString());		
+			}
 			
 		}catch(IOException e) {
 			e.printStackTrace();
 		}	
 	}
 	
-	public void searchById() {
+	public void searchNameById() {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-
 		System.out.println("Enter the ID: ");
 		String id = scanner.nextLine();
 		
@@ -36,12 +50,27 @@ public class App {
 		
 		try {
 			Response response = client.newCall(request).execute();
-			System.out.println(response.body().string());
+			String jsonFormat = response.body().string();
+						
+			Gson gson = new GsonBuilder().create();
+			Name name = gson.fromJson(jsonFormat, Name.class);
+			
+			System.out.println(name.toString());
 			
 		}catch(IOException e) {
 			e.printStackTrace();
 		}	
 	}
+	
+//	public void addName() {
+//		Scanner scanner = new Scanner(System.in);
+//		System.out.println("Enter the name: ");
+//		String name = scanner.nextLine();
+//		
+//		RequestBody body = RequestBody.create(Gson, gson);
+//		
+//		
+//	}
 	
 	public void disconnect() {
 		System.out.println("Client disconnected");
@@ -73,10 +102,11 @@ public class App {
 					break;
 				
 				case 2:
-					searchById();
+					searchNameById();
 					break;
 					
 				case 3:
+					//addName();
 					break;
 					
 				case 4:
