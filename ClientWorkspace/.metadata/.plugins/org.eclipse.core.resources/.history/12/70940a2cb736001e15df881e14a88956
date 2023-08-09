@@ -17,7 +17,6 @@ public class App {
 	private final OkHttpClient client = new OkHttpClient();
 	private String url = "http://localhost:1559/name/";
 	
-	
 	public void listAll() {
 		Request request = new Request.Builder().url(url).build();
 
@@ -28,6 +27,7 @@ public class App {
 			
 			Gson gson = new GsonBuilder().create();
 			Name[] names = gson.fromJson(jsonFormat, Name[].class);
+			//System.out.println(Arrays.toString(names));
 			
 			for (int i = 0; i < names.length; i++) {
 				System.out.println(names[i].toString());
@@ -140,7 +140,6 @@ public class App {
 		}
 	}
 	
-	
 	public void disconnect() {
 		System.out.println("Client disconnected");
 		System.exit(0);
@@ -192,7 +191,6 @@ public class App {
 				break;
 
 			default:
-				System.out.println("Invalid choice");
 				break;
 			}
 		}

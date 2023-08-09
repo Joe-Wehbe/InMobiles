@@ -140,7 +140,6 @@ public class App {
 		}
 	}
 	
-	
 	public void disconnect() {
 		System.out.println("Client disconnected");
 		System.exit(0);
@@ -192,7 +191,6 @@ public class App {
 				break;
 
 			default:
-				System.out.println("Invalid choice");
 				break;
 			}
 		}

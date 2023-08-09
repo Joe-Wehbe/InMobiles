@@ -25,6 +25,7 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="net.inmobiles.ClientWebAPI"/>
 			<item value="net.inmobiles.GroupChatClientK"/>
 			<item value="net.inmobiles.server"/>
 		</list>
@@ -32,6 +33,7 @@
 			<item value="net.inmobiles"/>
 		</list>
 		<list key="artifactId">
+			<item value="ClientWebAPI"/>
 			<item value="GroupChatClientK"/>
 			<item value="server"/>
 		</list>
@@ -65,5 +67,9 @@
 		<list key="version">
 			<item value="0.0.1-SNAPSHOT"/>
 		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
 	</section>
 </section>
