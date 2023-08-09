@@ -1,0 +1,45 @@
+package net.inmobiles.server;
+
+import java.io.*;
+import java.net.*;
+import java.util.HashMap;
+import java.util.Map;
+
+public class ClientHandler extends Thread{
+	
+	private Socket socket;
+	private DataInputStream dis;
+	private DataOutputStream dos;
+	private String name;
+	
+    public static Map<Socket, String> clientMap = new HashMap<>();
+	
+	public ClientHandler(Socket socket, DataInputStream dis, DataOutputStream dos, String name) {
+		this.socket = socket;
+		this.dos = dos;
+		this.dis = dis;	
+		this.name = name;	
+		clientMap.put(socket, name);
+	}
+
+	public void run() {
+		while(true) {
+			try {
+				String message = dis.readUTF();
+				System.out.println("Message received: '" + message + "', sending to all clients...");
+				
+	            for (Socket clientSocket : clientMap.keySet()) {
+	                DataOutputStream clientDos = new DataOutputStream(clientSocket.getOutputStream());
+	                clientDos.writeUTF(name + ": " + message);
+	            }
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	
+		
+	}
+
+}

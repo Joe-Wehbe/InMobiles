@@ -1,0 +1,47 @@
+package net.lakis.webapi;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+@Path("/name")
+public class JerseyServlet {
+	
+	private static final Map<String,Name> map = new HashMap<>();
+
+	// Method that sends to the client the created fname and lname
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Name get() {
+		System.out.println("hello");
+		Name name = new Name("kamal", "lakis");
+		return name;
+	}
+
+	// method that takes fname and lname as parameters and adds a name
+	@GET
+	@Path("/me")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Object getView(@QueryParam("fname") String fname, @QueryParam("lname") String lname) {
+		return new Name(fname, lname);
+
+	}
+	
+	/*********************************************************************************************/
+	// 										MY METHODS                                           //
+	/*********************************************************************************************/
+	
+	@GET
+	@Path("listAll")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void listAll() {
+		
+	}
+	
+
+}

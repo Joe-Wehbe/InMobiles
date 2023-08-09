@@ -1,0 +1,55 @@
+package net.lakis.webapi;
+
+import javax.ws.rs.ext.ContextResolver;
+import javax.ws.rs.ext.Provider;
+
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+@Provider
+public class JsonProvider implements ContextResolver<ObjectMapper> {
+	private static final ObjectMapper MAPPER = new ObjectMapper();
+
+//	static {
+//		MAPPER.setSerializationInclusion(Include.NON_EMPTY);
+////        MAPPER.enable(MapperFeature..)
+////		MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
+////        MAPPER.enable(MapperFeature.us)
+//		MAPPER.disable(MapperFeature.USE_GETTERS_AS_SETTERS);
+//
+//		MAPPER.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+//		MAPPER.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+//
+//		// MAPPER.disable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+//		MAPPER.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
+//		MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+//	}
+
+	public ObjectMapper getContext(Class<?> type) {
+		return MAPPER;
+	}
+
+	static {
+		MAPPER.setSerializationInclusion(Include.NON_EMPTY);
+
+//		if (configHandler.getConfig().getServletsConfig().isIdentJson())
+//			MAPPER.enable(SerializationFeature.INDENT_OUTPUT);
+//		else
+		MAPPER.disable(SerializationFeature.INDENT_OUTPUT);
+
+		MAPPER.disable(MapperFeature.USE_GETTERS_AS_SETTERS);
+
+		MAPPER.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
+		MAPPER.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+
+		MAPPER.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
+		MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+	}
+
+}

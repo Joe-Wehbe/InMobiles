@@ -1,0 +1,53 @@
+package net.inmobiles.client1;
+
+import java.io.*;
+import java.net.*;
+import java.util.Scanner;
+
+public class Client {
+	public void run() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		boolean received;
+
+		try {
+			InetAddress hostIP = InetAddress.getByName("localhost");
+			@SuppressWarnings("resource")
+			Socket socket = new Socket(hostIP, 4060);
+			
+			OutputStream os = socket.getOutputStream();
+			DataOutputStream dos = new DataOutputStream(os);
+			
+			InputStream is = socket.getInputStream();
+			DataInputStream dis = new DataInputStream(is);
+			
+			System.out.println(dis.readUTF());
+			String name = scanner.nextLine();
+			dos.writeUTF(name);
+			
+
+			while(true) {
+				
+				while (received = dis.readLine() != null) {
+					System.out.println(dis.readUTF());
+				}
+				
+				System.out.println();
+				System.out.println("Type your message: ");
+				String message = scanner.nextLine();
+				dos.writeUTF(message);
+			}
+			
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+    public static void main(String[] args){
+    	 Client c1 = new Client();
+    	 c1.run();
+    }
+}

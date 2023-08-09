@@ -1,0 +1,91 @@
+package net.lakis.webapi;
+
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
+import org.glassfish.grizzly.PortRange;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.NetworkListener;
+import org.glassfish.grizzly.http.server.ServerConfiguration;
+import org.glassfish.grizzly.nio.transport.TCPNIOTransport;
+import org.glassfish.grizzly.strategies.WorkerThreadIOStrategy;
+import org.glassfish.grizzly.threadpool.ThreadPoolConfig;
+import org.glassfish.grizzly.websockets.WebSocketAddOn;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpContainerProvider;
+import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.server.ResourceConfig;
+
+public class App {
+	public static void main(String[] args)
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
+			NoSuchMethodException, SecurityException, IOException, InterruptedException {
+		System.out.println(System.getProperty("user.dir"));
+
+		new App().main();
+		Thread.sleep(Long.MAX_VALUE);
+	}
+
+	private HttpServer server;
+
+	private void main() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			InstantiationException, NoSuchMethodException, SecurityException, IOException {
+		this.server = new HttpServer();
+
+		ServerConfiguration serverConfiguration = this.server.getServerConfiguration();
+		serverConfiguration.setAllowPayloadForUndefinedHttpMethods(true);
+		this.addNetworkListeners();
+
+		this.addServletsFromPackageName(server, serverConfiguration);
+
+		serverConfiguration.setJmxEnabled(true);
+
+//		WebSocketEngine.getEngine().register("", "/Echo", new Echo());
+
+		this.server.start();
+
+	}
+
+	private void addServletsFromPackageName(HttpServer server, ServerConfiguration serverConfiguration)
+			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
+			NoSuchMethodException, SecurityException, IOException {
+
+
+
+	 
+
+		final ResourceConfig rc = new ResourceConfig().packages("net.lakis").register(JacksonFeature.class)//
+				.register(JsonProvider.class);// .reg();
+
+	 
+
+		GrizzlyHttpContainer httpContainer = new GrizzlyHttpContainerProvider()
+				.createContainer(GrizzlyHttpContainer.class, rc);
+		serverConfiguration.addHttpHandler(httpContainer, "/");
+
+	}
+
+	private void addNetworkListeners() {
+
+		WebSocketAddOn webSocketAddon = new WebSocketAddOn();
+
+		NetworkListener listener = new NetworkListener("myServer", "0.0.0.0", new PortRange(1559, 1559));
+		listener.registerAddOn(webSocketAddon);
+
+		this.server.addListener(listener);
+
+		TCPNIOTransport transport = listener.getTransport();
+
+		ThreadPoolConfig conf = ThreadPoolConfig.defaultConfig().setPoolName("worker-thread-").setCorePoolSize(10)
+				.setMaxPoolSize(100).setQueueLimit(-1)/* same as default */;
+
+		transport.configureBlocking(false);
+		transport.setSelectorRunnersCount(4);
+		transport.setWorkerThreadPoolConfig(conf);
+		transport.setIOStrategy(WorkerThreadIOStrategy.getInstance());
+		transport.setTcpNoDelay(true);
+		transport.setReadBufferSize(1000000);
+		transport.setReuseAddress(true);
+
+	}
+}

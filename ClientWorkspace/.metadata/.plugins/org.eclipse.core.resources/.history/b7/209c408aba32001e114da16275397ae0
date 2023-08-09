@@ -1,0 +1,5 @@
+package net.inmobiles.client1;
+
+public class CommunicationHandler {
+
+}

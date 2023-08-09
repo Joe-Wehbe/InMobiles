@@ -1,0 +1,63 @@
+package net.lakis.webapi;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+@Path("/name")
+public class JerseyServlet {
+
+	private static final Map<String, Name> map = new HashMap<>();
+
+	 
+
+	/*********************************************************************************************/
+	// MY METHODS //
+	/*********************************************************************************************/
+
+	@GET
+	@Path("listAll")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void listAll() {
+	}
+
+	@POST
+	@Path("add")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void addName(@QueryParam("fname") String fname, @QueryParam("lname") String lname) {
+		// map.put()
+	}
+
+	public static String idGenerator() {
+
+		String id;
+		do {
+			id = UUID.randomUUID().toString();
+		} while (map.containsKey(id));
+		return id;
+
+	}
+
+	private static int id;
+
+	public static Name nameFactory(String fname, String lname) {
+		return new Name(idGenerator(), fname, lname);
+	}
+
+	public static void main(String[] args) {
+		Name name = nameFactory("joe", "wehbe");
+		map.put(name.getId(), name);
+		name = nameFactory("adda", "adsa");
+		map.put(name.getId(), name);
+		
+		System.out.println(map);
+
+	}
+}

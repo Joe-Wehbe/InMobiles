@@ -1,0 +1,25 @@
+package net.lakis.webapi;
+
+public class Name {
+	private String fname;
+	private String lname;
+	
+	public Name() {
+		
+	}
+
+	public Name(String fname, String lname) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
+}
