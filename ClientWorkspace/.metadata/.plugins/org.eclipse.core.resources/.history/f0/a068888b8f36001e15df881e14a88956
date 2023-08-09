@@ -1,0 +1,30 @@
+package net.inmobiles.ClientWebAPI;
+
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class App {
+	
+	final OkHttpClient client = new OkHttpClient();
+	
+	public void GET() {
+		
+		Request getRequest = new Request.Builder().url("https://localhost:1559/class/list").build();
+		
+		try {
+			Response response = client.newCall(getRequest).execute();
+			System.out.println(response.body().string());
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void main(String[] args) throws IOException {
+		App example = new App();
+		example.GET();
+	}
+}
