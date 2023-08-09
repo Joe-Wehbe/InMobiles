@@ -1,7 +1,5 @@
 package net.inmobiles.ClientWebAPI;
 
-
-
 public class Name {
 	
 	private String id;

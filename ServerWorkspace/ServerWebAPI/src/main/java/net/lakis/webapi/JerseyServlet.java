@@ -49,10 +49,6 @@ public class JerseyServlet {
 	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Name> listAll() {
-		map.put("1", new Name("1","joe", "wwehbe"));
-		map.put("2", new Name("2","lol", "wwehbe"));
-		map.put("3", new Name("3","hi", "wwehbe"));
-
 		return map.values();
 	}
 

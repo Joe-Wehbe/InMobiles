@@ -1,12 +1,13 @@
 package net.inmobiles.ClientWebAPI;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Scanner;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import okhttp3.FormBody;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -15,14 +16,11 @@ import okhttp3.Response;
 public class App {
 	
 	private final OkHttpClient client = new OkHttpClient();
-	private String listAllURL = "http://localhost:1559/class/list";
-	private String searchByIdURL = "http://localhost:1559/class/";
-	private String addURL = "http://localhost:1559/class/add";
-	private String updateURL = "http://localhost:1559/class/update";
-	private String deleteURL = "http://localhost:1559/class/delete";
+	private String baseURL = "http://localhost:1559/class/";
+	
 	
 	public void listAll() {		
-		Request listAllRequest = new Request.Builder().url(listAllURL).build();
+		Request listAllRequest = new Request.Builder().url(baseURL + "list").build();
 		
 		try {
 			Response response = client.newCall(listAllRequest).execute();
@@ -40,13 +38,14 @@ public class App {
 		}	
 	}
 	
+	
 	public void searchNameById() {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter the ID: ");
 		String id = scanner.nextLine();
 		
-		Request request = new Request.Builder().url(searchByIdURL + id).build();
+		Request request = new Request.Builder().url(baseURL + id).build();
 		
 		try {
 			Response response = client.newCall(request).execute();
@@ -62,20 +61,46 @@ public class App {
 		}	
 	}
 	
-//	public void addName() {
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("Enter the name: ");
-//		String name = scanner.nextLine();
-//		
-//		RequestBody body = RequestBody.create(Gson, gson);
-//		
-//		
-//	}
+	
+	public void addName() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		
+		System.out.println("Enter the first name: ");
+		String fname = scanner.nextLine();
+		System.out.println("Enter the last name: ");
+		String lname = scanner.nextLine();
+		
+		Name name = new Name("4", fname, lname);
+		
+		Gson gson = new GsonBuilder().create();
+		String json = gson.toJson(name);
+				
+		MediaType mediaType = MediaType.parse("application/json");
+//		RequestBody body = new FormBody.Builder()
+//				.add("name", json)
+//				.build();
+		
+        RequestBody body = RequestBody.create(json, mediaType);
+
+		
+		Request request = new Request.Builder().url(baseURL + "add").post(body).build();
+		
+		try {
+			Response response = client.newCall(request).execute();
+			System.out.println("Name added");
+			
+		}catch(IOException e) {
+			e.printStackTrace();
+		}	
+	}
+	
 	
 	public void disconnect() {
 		System.out.println("Client disconnected");
 		System.exit(0);
 	}
+	
 	
 	public void run() {
 		int flag = 1;
@@ -106,7 +131,7 @@ public class App {
 					break;
 					
 				case 3:
-					//addName();
+					addName();
 					break;
 					
 				case 4:
@@ -124,6 +149,7 @@ public class App {
 			}
 		}
 	}
+	
 	
 	public static void main(String[] args) throws IOException {
 		App client = new App();
