@@ -30,7 +30,9 @@ public class App {
 			Name[] names = gson.fromJson(jsonFormat, Name[].class);
 			
 			for (int i = 0; i < names.length; i++) {
-				System.out.println(names[i].toString());
+				if(names[i] != null) {
+					System.out.println(names[i].toString());
+				}
 			}
 
 		} catch (IOException e) {

@@ -22,24 +22,28 @@ public class NameServlet {
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void listAll() {
+	public Name[] listAll() {
+		Name[] names = new Name[10];
 		try {
-			connection.listAll();
+			names = connection.listAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return names;
 	}
 
 	// Method that returns the name of a specific user by id
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void searchByID(@PathParam("id") String userID) {
+	public Name searchByID(@PathParam("id") String userID) {
+		Name name = null;
 		try {
-			connection.searchNameById(userID);
+			 name = connection.searchNameById(userID);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return name;
 	}
 
 	// Method that adds names
