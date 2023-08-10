@@ -19,26 +19,22 @@ public class ConnectionDB {
 	static String username = "root";
 	static String password = "root";
 	
-	public Name[] listAll() throws SQLException {
+	public ArrayList<Name> listAll() throws SQLException {
 		ps = connection.prepareStatement("SELECT * FROM `webapisdb`.`names`;");
 		result = ps.executeQuery();
 		
-		int i = 0;
 		String fname = "";
 		String lname = "";
+		String id = "";
 		ArrayList<Name> names = new ArrayList<Name>();
 		
 		while(result.next()) {
-			System.out.println(fname = result.getString(2));
-			System.out.println(fname = result.getString(3));
-
+			id = result.getString(1);
 			fname = result.getString(2);
 			lname = result.getString(3);
-			names.add(new Name("", fname, lname));
-			i++;
+			names.add(new Name(id, fname, lname));
 		}
-		Object[] namesArray = names.toArray();
-		return (Name[]) namesArray;
+		return names;
 	}
 	
 	public Name searchNameById(String id) throws SQLException {
@@ -62,7 +58,6 @@ public class ConnectionDB {
 		ps = connection.prepareStatement("INSERT INTO `webapisdb`.`names` (`fname`, `lname`) VALUES (?, ?);");
 		ps.setString(1, fname);
 		ps.setString(2, lname);
-		ps.executeUpdate();
 		
 		int status = ps.executeUpdate();
 		

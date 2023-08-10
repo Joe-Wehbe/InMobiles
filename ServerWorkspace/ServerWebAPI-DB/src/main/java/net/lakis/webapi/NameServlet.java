@@ -1,6 +1,7 @@
 package net.lakis.webapi;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,14 +23,15 @@ public class NameServlet {
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Name[] listAll() {
-		Name[] names = new Name[10];
+	public Object[] listAll() {
+		ArrayList<Name> names = new ArrayList<Name>();
 		try {
 			names = connection.listAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return names;
+		Object[] namesArray = names.toArray();
+		return namesArray;
 	}
 
 	// Method that returns the name of a specific user by id
