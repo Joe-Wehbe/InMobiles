@@ -1,8 +1,6 @@
 package net.lakis.webapi;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.SQLException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -17,23 +15,31 @@ import javax.ws.rs.core.MediaType;
 @Path("/name")
 public class NameServlet {
 
-	private static final Map<String, Name> map = new HashMap<>();
 	private static int id = 1;
+	ConnectionDB connection = new ConnectionDB();
 
 	// Method that lists all the names
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Name> listAll() {
-		return map.values();
+	public void listAll() {
+		try {
+			connection.listAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Method that returns the name of a specific user by id
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Name searchByID(@PathParam("id") String userID) {
-		return map.get(userID);
+	public void searchByID(@PathParam("id") String userID) {
+		try {
+			connection.searchNameById(userID);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Method that adds names
@@ -42,9 +48,11 @@ public class NameServlet {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String addName(Name name) {
-		name.setId(String.valueOf(id++));
-		map.put(name.getId(), name);
-		System.out.println("Name added");
+		try {
+			connection.addName(name.getFname(), name.getLname());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return "Name added";
 	}
 
@@ -54,11 +62,11 @@ public class NameServlet {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateName(Name name) {
-		if (!map.containsKey(name.getId())) {
-			return "Unknown Id: " + name.getId();
+		try {
+			connection.updateName(name.getId(), name.getFname(), name.getLname());
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		map.put(name.getId(), name);
-		System.out.println("Name updated");
 		return "Name updated";
 	}
 
@@ -68,11 +76,11 @@ public class NameServlet {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String deleteName(@PathParam("id") String id) {
-		if (!map.containsKey(id)) {
-			return "Unknown Id: " + id;
+		try {
+			connection.deleteName(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		map.remove(id);
-		System.out.println("Name deleted");
 		return "Name deleted";
 	}
 

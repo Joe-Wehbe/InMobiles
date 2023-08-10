@@ -14,6 +14,7 @@ package net.lakis.webapi;
 */
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 
 import org.glassfish.grizzly.PortRange;
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -31,6 +32,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class App {
 	
 	private HttpServer server;
+	ConnectionDB connection = new ConnectionDB();
 	
 /*
 	The main method is the entry point of the application. It initializes an 
@@ -39,7 +41,7 @@ public class App {
 */
 	public static void main(String[] args)
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException,
-			NoSuchMethodException, SecurityException, IOException, InterruptedException {
+			NoSuchMethodException, SecurityException, IOException, InterruptedException, ClassNotFoundException, SQLException {
 		System.out.println(System.getProperty("user.dir")); // prints the current working directory
 
 		new App().main();
@@ -49,7 +51,7 @@ public class App {
 	
 	// This method is responsible for setting up and starting the Grizzly HTTP server
 	private void main() throws IllegalAccessException, IllegalArgumentException, InvocationTargetException,
-			InstantiationException, NoSuchMethodException, SecurityException, IOException {
+			InstantiationException, NoSuchMethodException, SecurityException, IOException, ClassNotFoundException, SQLException {
 		
 		// Creates a new instance of the HttpServer class. This will be the Grizzly HTTP server that handles incoming requests.
 		this.server = new HttpServer();
@@ -71,6 +73,7 @@ public class App {
 
 //		WebSocketEngine.getEngine().register("", "/Echo", new Echo());
 
+		connection.connect();
 		this.server.start();
 	}
 	
