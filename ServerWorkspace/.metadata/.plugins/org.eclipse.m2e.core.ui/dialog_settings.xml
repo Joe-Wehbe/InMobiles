@@ -70,6 +70,7 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\joewe\Desktop\inmobiles\EclipseWorkspaces\ServerWorkspace\ServerWebAPI-DB"/>
 			<item value="C:\Users\joewe\Desktop\inmobiles\EclipseWorkspaces\ServerWorkspace\ServerWebAPI"/>
 		</list>
 		<list key="projectNameTemplate">

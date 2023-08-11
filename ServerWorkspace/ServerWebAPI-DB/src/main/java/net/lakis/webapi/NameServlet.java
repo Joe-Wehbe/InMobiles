@@ -1,5 +1,6 @@
 package net.lakis.webapi;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -23,7 +24,8 @@ public class NameServlet {
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Object[] listAll() {
+	public Object[] listAll() throws InstantiationException, IllegalAccessException, IllegalArgumentException, 
+	InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		ArrayList<Name> names = new ArrayList<Name>();
 		try {
 			names = connection.listAll();
@@ -38,7 +40,8 @@ public class NameServlet {
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Name searchByID(@PathParam("id") String userID) {
+	public Name searchByID(@PathParam("id") String userID) throws InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		Name name = null;
 		try {
 			 name = connection.searchNameById(userID);
@@ -53,13 +56,14 @@ public class NameServlet {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String addName(Name name) {
+	public String addName(Name name) throws InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		try {
 			connection.addName(name.getFname(), name.getLname());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "Name added";
+		return "Name added " + name.getId();
 	}
 
 	// Method that updates a name specified by the id
@@ -67,7 +71,8 @@ public class NameServlet {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String updateName(Name name) {
+	public String updateName(Name name) throws InstantiationException, IllegalAccessException, IllegalArgumentException, 
+	InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		try {
 			connection.updateName(name.getId(), name.getFname(), name.getLname());
 		} catch (SQLException e) {
@@ -81,7 +86,8 @@ public class NameServlet {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String deleteName(@PathParam("id") String id) {
+	public String deleteName(@PathParam("id") String id) throws InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		try {
 			connection.deleteName(id);
 		} catch (SQLException e) {

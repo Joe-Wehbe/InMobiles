@@ -32,7 +32,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class App {
 	
 	private HttpServer server;
-	ConnectionDB connection = new ConnectionDB();
 	
 /*
 	The main method is the entry point of the application. It initializes an 
@@ -73,7 +72,6 @@ public class App {
 
 //		WebSocketEngine.getEngine().register("", "/Echo", new Echo());
 
-		connection.connect();
 		this.server.start();
 	}
 	
