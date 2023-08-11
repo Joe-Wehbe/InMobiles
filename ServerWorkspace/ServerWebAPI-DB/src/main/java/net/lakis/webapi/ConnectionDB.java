@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ConnectionDB {
@@ -41,20 +42,13 @@ public class ConnectionDB {
 		try {
 			if (connection != null)
 				connection.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
+
 			if (ps != null)
 				ps.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
+
 			if (result != null)
 				result.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -86,37 +80,37 @@ public class ConnectionDB {
 		try {
 			if (connection != null)
 				connection.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
+
 			if (ps != null)
 				ps.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
+
 			if (result != null)
 				result.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
 		return new Name(id, fname, lname);
 	}
 
-	public void addName(String fname, String lname) throws SQLException, InstantiationException, IllegalAccessException, 
+	public int addName(String fname, String lname) throws SQLException, InstantiationException, IllegalAccessException, 
 	IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {	
 		
 		Connection connection = connect();
 		PreparedStatement ps;
+		ResultSet result;
+		int id = -1;
 
-		ps = connection.prepareStatement("INSERT INTO `webapisdb`.`names` (`fname`, `lname`) VALUES (?, ?);");
+		ps = connection.prepareStatement("INSERT INTO `webapisdb`.`names` (`fname`, `lname`) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS);
 		ps.setString(1, fname);
 		ps.setString(2, lname);
 
 		int status = ps.executeUpdate();
+		result = ps.getGeneratedKeys();
+		
+		if(result.next()) {
+			id = result.getInt(1);
+		}
 
 		if (status != 0) {
 			System.out.println("Name Added");
@@ -127,14 +121,15 @@ public class ConnectionDB {
 		try {
 			if (connection != null)
 				connection.close();
-		} catch (Exception e) {
-		}
-		
-		try {
+
 			if (ps != null)
 				ps.close();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		return id;
 	}
 
 	public void updateName(String id, String fname, String lname) throws SQLException, InstantiationException, IllegalAccessException, 
@@ -159,13 +154,12 @@ public class ConnectionDB {
 		try {
 			if (connection != null)
 				connection.close();
-		} catch (Exception e) {
-		}
-		
-		try {
+
 			if (ps != null)
 				ps.close();
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
@@ -190,12 +184,10 @@ public class ConnectionDB {
 		try {
 			if (connection != null)
 				connection.close();
-		} catch (Exception e) {
-		}
-		
-		try {
+
 			if (ps != null)
 				ps.close();
+			
 		} catch (Exception e) {
 		}
 

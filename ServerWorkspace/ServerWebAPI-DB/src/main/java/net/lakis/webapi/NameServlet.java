@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 @Path("/name")
 public class NameServlet {
 
-	private static int id = 1;
 	ConnectionDB connection = new ConnectionDB();
 
 	// Method that lists all the names
@@ -58,12 +57,13 @@ public class NameServlet {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String addName(Name name) throws InstantiationException, IllegalAccessException, IllegalArgumentException,
 	InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
+		int id = -1;
 		try {
-			connection.addName(name.getFname(), name.getLname());
+			id = connection.addName(name.getFname(), name.getLname());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return "Name added " + name.getId();
+		return "Name added with id: " + Integer.toString(id); 
 	}
 
 	// Method that updates a name specified by the id
