@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="C:\Users\joewe\Desktop\inmobiles\EclipseWorkspaces\OtherWorkspace\MultiThreads"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -25,12 +26,14 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="net.imobiles.Exercises"/>
 			<item value="net.imobiles.WebAPI"/>
 		</list>
 		<list key="groupId">
 			<item value="net.imobiles"/>
 		</list>
 		<list key="artifactId">
+			<item value="Exercises"/>
 			<item value="WebAPI"/>
 		</list>
 		<list key="projectNameTemplate">
