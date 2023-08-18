@@ -40,7 +40,7 @@ public class TestCase {
 
 	@Override
 	public String toString() {
-		return "TestCase [n=" + n + ", k=" + k + ", array=" + Arrays.toString(array) + "]";
+		return "n=" + n + ", k=" + k + ", Elements: " + Arrays.toString(array);
 	}
 	
 }

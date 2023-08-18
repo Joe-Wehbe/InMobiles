@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class ProblemF {
 	
-	private TestCase[] tests = null;
+	private TestCase[] tests;
+	private int numOfTests;
+
 
 	public void getFileContent() {
 		
@@ -16,7 +18,6 @@ public class ProblemF {
 		File file = new File(path);
 		
 		String[] numbers = null;
-		int numOfTests = 0;
 		int count = 1;
 		int index = 0;
 		int n = 0;
@@ -27,14 +28,15 @@ public class ProblemF {
 			@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(file);
 			
-			System.out.println("The file contains: ");
-			System.out.println("------------------");
+			System.out.println("Input file content: ");
+			System.out.println("-------------------");
 						
 			while(scanner.hasNextLine()) {
 				
 				String[] line = scanner.nextLine().split(" ");
+				
 				for(int i = 0; i < line.length; i++) {
-					System.out.print(line[i]);
+					System.out.print(line[i] + " ");
 									
 					if(count % 2 == 0) {
 						n = Integer.parseInt(line[0]);
@@ -52,9 +54,10 @@ public class ProblemF {
 						}
 					}
 				}
+				
 				if(count % 2 == 1 && count > 2) {
 					index++;
-				}
+				}		
 				count++;
 				System.out.println();
 			}
@@ -64,16 +67,28 @@ public class ProblemF {
 		}
 	}
 	
-	public void print() {
+	public void printTestCases() {
 		System.out.println();
+		System.out.println(numOfTests + " Test cases: ");
+		System.out.println("-------------");
 		for(int i = 0; i < tests.length; i++) {
-			System.out.println(tests[i].toString());
+			int count = i + 1;
+			System.out.println("TestCase " + count + " --> " + tests[i].toString());
 		}
 	}
+	
+	
+	public void performOperations() {
+		
+	}
+	
+	
+
+	
 	
 	public static void main(String[] args) {
 		ProblemF pf = new ProblemF();
 		pf.getFileContent();
-		pf.print();
+		pf.printTestCases();
 	}
 }
