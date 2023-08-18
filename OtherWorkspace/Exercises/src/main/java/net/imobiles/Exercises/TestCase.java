@@ -6,9 +6,9 @@ public class TestCase {
 
 	private int n;
 	private int k;
-	private String[] array;
+	private int[] array;
 	
-	public TestCase(int n, int k, String[] array) {
+	public TestCase(int n, int k, int[] array) {
 		this.n = n;
 		this.k = k;
 		this.array = array;
@@ -30,11 +30,11 @@ public class TestCase {
 		this.k = k;
 	}
 
-	public String[] getArray() {
+	public int[] getArray() {
 		return array;
 	}
 
-	public void setArray(String[] array) {
+	public void setArray(int[] array) {
 		this.array = array;
 	}
 

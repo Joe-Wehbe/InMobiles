@@ -17,7 +17,7 @@ public class ProblemF {
 				+ "src\\main\\java\\net\\imobiles\\Exercises\\input.txt";	
 		File file = new File(path);
 		
-		String[] numbers = null;
+		int[] numbers = null;
 		int count = 1;
 		int index = 0;
 		int n = 0;
@@ -49,7 +49,7 @@ public class ProblemF {
 							tests = new TestCase[numOfTests];
 						}
 						if(count > 2) {
-							numbers = line;
+							numbers = convertToInt(line);
 							tests[index] = new TestCase(n, k, numbers);
 						}
 					}
@@ -67,6 +67,14 @@ public class ProblemF {
 		}
 	}
 	
+	public int[] convertToInt(String[] array) {
+		int[] converted = new int[array.length];
+		for(int i = 0; i < array.length; i++) {
+			converted[i] = Integer.parseInt(array[i]);
+		}
+		return converted;
+	}
+	
 	public void printTestCases() {
 		System.out.println();
 		System.out.println(numOfTests + " Test cases: ");
@@ -80,9 +88,31 @@ public class ProblemF {
 	
 	public void performOperations() {
 		
+		System.out.println();
+		
+		int max = 0;
+		
+		for(int i = 0; i < tests.length; i++) {
+			int count = i + 1;
+			System.out.println("Performing " + tests[i].getK() + " operations on test case " + count + ":");
+			System.out.println("---------------------------------------");
+			
+			//for()
+			
+		}
+		
+		
 	}
 	
-	
+	public void getMax(String[] array) {
+		int max = 0;
+		
+		for(int i = 0; i < array.length; i++) {
+			if(Integer.parseInt(array[i]) > max) {
+				max = Integer.parseInt(array[i]);
+			}
+		}
+	}
 
 	
 	
@@ -90,5 +120,6 @@ public class ProblemF {
 		ProblemF pf = new ProblemF();
 		pf.getFileContent();
 		pf.printTestCases();
+		pf.performOperations();
 	}
 }
