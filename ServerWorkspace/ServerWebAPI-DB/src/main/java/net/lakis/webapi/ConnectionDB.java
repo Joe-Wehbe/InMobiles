@@ -26,7 +26,7 @@ public class ConnectionDB {
 		String id = "";
 		
 		try(Connection connection = connect();
-				PreparedStatement ps = connection.prepareStatement("SELECT * FROM `webapisdb`.`names`;");
+				PreparedStatement ps = connection.prepareStatement("SELECT * FROM `webapidb`.`names`;");
 				ResultSet result = ps.executeQuery()){
 
 			while (result.next()) {
@@ -47,7 +47,7 @@ public class ConnectionDB {
 	    String lname = "";
 
 	    try (Connection connection = connect();
-	         PreparedStatement ps = connection.prepareStatement("SELECT * FROM `webapisdb`.`names` WHERE id = ?")) {
+				PreparedStatement ps = connection.prepareStatement("SELECT * FROM `webapidb`.`names` WHERE id = ?")) {
 	        
 	        ps.setInt(1, Integer.parseInt(id));
 	        
@@ -69,7 +69,7 @@ public class ConnectionDB {
 		int id = -1;
 		
 		try(Connection connection = connect();
-				PreparedStatement ps = connection.prepareStatement("INSERT INTO `webapisdb`.`names` (`fname`, `lname`) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS)){
+				PreparedStatement ps = connection.prepareStatement("INSERT INTO `webapidb`.`names` (`fname`, `lname`) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS)){
 			
 			ps.setString(1, fname);
 			ps.setString(2, lname);
@@ -96,7 +96,7 @@ public class ConnectionDB {
 	IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		
 		try(Connection connection = connect();
-				PreparedStatement ps = connection.prepareStatement("UPDATE `webapisdb`.`names` SET `fname`=?, `lname`=? WHERE `id`=?")){
+				PreparedStatement ps = connection.prepareStatement("UPDATE `webapidb`.`names` SET `fname`=?, `lname`=? WHERE `id`=?")){
 			
 			ps.setString(1, fname);
 			ps.setString(2, lname);
@@ -116,7 +116,7 @@ public class ConnectionDB {
 	InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {
 		
 		try(Connection connection = connect();
-				PreparedStatement ps = connection.prepareStatement("DELETE FROM `webapisdb`.`names` WHERE `id`=?")){
+				PreparedStatement ps = connection.prepareStatement("DELETE FROM `webapidb`.`names` WHERE `id`=?")){
 			
 			ps.setInt(1, Integer.parseInt(id));
 			int status = ps.executeUpdate();
