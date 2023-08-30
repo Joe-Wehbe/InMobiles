@@ -12,13 +12,15 @@ InMobiles was voted best VAS supplier for 2020. Customers include Alfa, Touch, K
 Etisalat, KCell... 
 
 # Repository Overview 
-This repository includes all of the Java projects that I completed during my internship at InMobiles. It is composed of three Eclipse workspaces, <br>
-> `ServerWorkspace` which contains all the server programs that I developed <br>
+This repository includes all of the Java projects that I completed during my internship at InMobiles. It is composed of three Eclipse workspaces: <br>
 > `ClientWorkspace` which contains all the client applications that interact with the servers <br>
+> `ServerWorkspace` which contains all the server programs that I developed <br>
 > `OtherWorkspace ` which contains all Java exercises that do not require client-server implementation <br>
 
+## Client-Server Workspaces
+
 Below is a table that associates each client program to its server:
-| Client | Server |
+| ClientWorkspace | ServerWorkspace |
 | ------ | ------ |
 | TCPclient | TCPserver |
 | UDPclient | UDPserver |
@@ -27,3 +29,30 @@ Below is a table that associates each client program to its server:
 | GroupChatClientK | GroupChatServerK |
 | ClientWebAPI | ServerWebAPI <br> ServerWebAPI-DB |
 
+#### TCPclient/TCPserver
+> A simple client-server application that uses `Transmission Control Protocol (TCP)` to establish a connection and allow communication on the localhost.
+
+#### UDPclient/UDPserver
+> A simple client-server application that uses `User Datagram Protocol (UDP)` to allow communication between the client and the server on the localhost.
+
+#### -/RemoteServer
+> A simple client-server application that uses Transmission Control Protocl (TCP) to establish a connection and allow communication between my machine (server) and a remote client (developed by another intern).
+
+#### GroupChatClient/GroupChatServer
+> A multi-threaded client-server application that features an implementation of a group chat system where multiple clients can communicate with each other via messages.
+
+#### GroupChatClientK | GroupChatServerk
+> A multi-threaded client-server application that features an implementation of a group chat system where multiple clients can communicate with each other via messages. This application was developed by my supervisor.
+
+#### ClientWebAPI/ServerWebAPI
+> A client-server application that allows a client to manage users using web APIs `GET, POST, DELETE, PUT`. This application entails JSON serialization/deserialization, and users are stored in a hashmap.
+
+#### ClientWebAPI/ServerWebAPI-DB 
+> The client-side implementation remains the same as the one aforementioned, but the server was updated to replace the hashmap by a MySQL database.
+
+## Other Workspace
+#### MultiThreads
+> This project is a simple implementation of a two-thread Java application
+
+### Exercises
+> This project contains a Java exercise 
