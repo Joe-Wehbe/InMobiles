@@ -17,8 +17,6 @@ This repository includes all of the Java projects that I completed during my int
 > `ServerWorkspace` which contains all the server programs that I developed <br>
 > `OtherWorkspace ` which contains all Java exercises that do not require client-server implementation <br>
 
-## Client-Server Workspaces
-
 Below is a table that associates each client program to its server:
 | ClientWorkspace | ServerWorkspace |
 | ------ | ------ |
@@ -49,10 +47,3 @@ Below is a table that associates each client program to its server:
 
 #### ClientWebAPI/ServerWebAPI-DB 
 > The client-side implementation remains the same as the one aforementioned, but the server was updated to replace the hashmap by a MySQL database.
-
-## Other Workspace
-#### MultiThreads
-> This project is a simple implementation of a two-thread Java application
-
-### Exercises
-> This project contains a Java exercise 
