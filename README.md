@@ -12,4 +12,18 @@ InMobiles was voted best VAS supplier for 2020. Customers include Alfa, Touch, K
 Etisalat, KCell... 
 
 # Repository Overview 
-This repository includes all of the Java projects that I completed during my internship at InMobiles.
+This repository includes all of the Java projects that I completed during my internship at InMobiles. It is composed of three Eclipse workspaces, <br>
+> `ServerWorkspace` which contains all the server programs that I developed <br>
+> `ClientWorkspace` which contains all the client applications that interact with the servers <br>
+> `OtherWorkspace ` which contains all Java exercises that do not require client-server implementation <br>
+
+Below is a table that associates each client program to its server:
+| Client | Server |
+| ------ | ------ |
+| TCPclient | TCPserver |
+| UDPclient | UDPserver |
+| - | RemoteServer |
+| GroupChatClient | GroupChatServer |
+| GroupChatClientK | GroupChatServerK |
+| ClientWebAPI | ServerWebAPI <br> ServerWebAPI-DB |
+
