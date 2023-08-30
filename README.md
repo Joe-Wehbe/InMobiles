@@ -43,7 +43,7 @@ Below is a table that associates each client program to its server:
 > A multi-threaded client-server application that features an implementation of a group chat system where multiple clients can communicate with each other via messages. This application was developed by my supervisor.
 
 #### ClientWebAPI/ServerWebAPI
-> A client-server application that allows a client to manage users using web APIs `GET` `POST` `DELETE` `PUT`. This application entails JSON serialization/deserialization, and users are stored in a hashmap.
+> A client-server application that allows a client to manage users using web APIs `GET` `POST` `DELETE` `PUT`. This application entails `JSON` serialization/deserialization, and users are stored in a hashmap.
 
 #### ClientWebAPI/ServerWebAPI-DB 
-> The client-side implementation remains the same as the one aforementioned, but the server was updated to replace the hashmap by a MySQL database.
+> The client-side implementation remains the same as the one aforementioned, but the server was updated to replace the hashmap by a `MySQL` database.
