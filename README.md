@@ -12,7 +12,7 @@ InMobiles was voted best VAS supplier for 2020. Customers include Alfa, Touch, K
 Etisalat, KCell... 
 
 # Repository Overview 
-This repository includes all of the Java projects that I completed during my internship at InMobiles. It is composed of three Eclipse workspaces: <br>
+This repository includes all of the Java training projects that I completed during my internship at InMobiles. It is composed of three Eclipse workspaces: <br>
 > `ClientWorkspace` which contains all the client applications that interact with the servers <br>
 > `ServerWorkspace` which contains all the server programs that I developed <br>
 > `OtherWorkspace ` which contains all Java exercises that do not require client-server implementation <br>
