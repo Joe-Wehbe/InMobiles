@@ -24,7 +24,6 @@ Below is a table that associates each client program to its server:
 | UDPclient | UDPserver |
 | - | RemoteServer |
 | GroupChatClient | GroupChatServer |
-| GroupChatClientK | GroupChatServerK |
 | ClientWebAPI | ServerWebAPI <br> ServerWebAPI-DB |
 
 #### TCPclient/TCPserver
@@ -38,9 +37,6 @@ Below is a table that associates each client program to its server:
 
 #### GroupChatClient/GroupChatServer
 > A multi-threaded client-server application that features an implementation of a group chat system where multiple clients can communicate with each other via messages.
-
-#### GroupChatClientK | GroupChatServerk
-> A multi-threaded client-server application that features an implementation of a group chat system where multiple clients can communicate with each other via messages. This application was developed by my supervisor.
 
 #### ClientWebAPI/ServerWebAPI
 > A client-server application that allows a client to manage users using web APIs `GET` `POST` `DELETE` `PUT`. This application entails `JSON` serialization/deserialization, and users are stored in a hashmap.
